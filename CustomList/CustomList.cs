@@ -13,6 +13,6 @@ namespace CustomList
         public void RemoveFromList(T value) { }
 
         public void ToString(T value) { }
-
+        public void Zip(List<T> list1, List<T> list2) { }
     }
 }

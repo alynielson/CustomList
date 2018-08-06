@@ -356,5 +356,64 @@ namespace CustomListUnitTests
             Assert.AreEqual(0, subtracted.count);
         }
 
+        [TestMethod]
+        public void Subtract_MultipleLists_ReturnNewList()
+        {
+            CustomList<int> numbers1 = new CustomList<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            CustomList<int> numbers2 = new CustomList<int> { 1 };
+            CustomList<int> numbers3 = new CustomList<int> { 8, 7 };
+            CustomList<int> subtracted = numbers1 - numbers2 - numbers2 - numbers3;
+            Assert.AreEqual(subtracted.Count, 14);
+        }
+
+
+        [TestMethod]
+        public void Zip_TwoListsOfSameLength_ReturnNewList()
+        {
+            CustomList<int> numbers1 = new CustomList<int> { 1, 3, 5 };
+            CustomList<int> numbers2 = new CustomList<int> { 2, 4, 6 };
+            CustomList<int> zipped = new CustomList<int> { };
+            zipped.Zip(numbers1, numbers2);
+            Assert.AreEqual(zipped[4], 5);
+        }
+
+        public void Zip_TwoStringsDifferentLength_ReturnNewList()
+        {
+            CustomList<int> numbers1 = new CustomList<int> { 1,2,3 };
+            CustomList<int> numbers2 = new CustomList<int> { 6};
+            CustomList<int> zipped = new CustomList<int> { };
+            zipped.Zip(numbers1, numbers2);
+            CustomList<int> expected = new CustomList<int> { 1, 6, 2, 3 };
+            CollectionAssert.AreEqual(zipped, expected);
+        }
+
+        public void Zip_OneEmptyString_ReturnSameList()
+        {
+            CustomList<int> numbers1 = new CustomList<int> { 1, 2, 3 };
+            CustomList<int> numbers2 = new CustomList<int> {};
+            CustomList<int> zipped = new CustomList<int> { };
+            zipped.Zip(numbers1, numbers2);
+            CustomList<int> expected = new CustomList<int> { 1, 2, 3 };
+            CollectionAssert.AreEqual(zipped, expected);
+        }
+
+        public void Zip_FirstStringEmpty_ReturnEmptyString()
+        {
+            CustomList<int> numbers1 = new CustomList<int> {  };
+            CustomList<int> numbers2 = new CustomList<int> { 1,2,3};
+            CustomList<int> zipped = new CustomList<int> { };
+            zipped.Zip(numbers1, numbers2);
+            CustomList<int> expected = new CustomList<int> { };
+            CollectionAssert.AreEqual(zipped, expected);
+        }
+
+        public Zip_TwoEmptyStrings_ReturnEmptyString()
+        {
+            CustomList<int> numbers1 = new CustomList<int> {  };
+            CustomList<int> numbers2 = new CustomList<int> {  };
+            CustomList<int> zipped = new CustomList<int> { };
+            zipped.Zip(numbers1, numbers2);
+            Assert.AreEqual(zipped.Count, 0);
+        }
     }
 }
