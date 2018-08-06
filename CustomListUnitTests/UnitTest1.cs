@@ -259,5 +259,102 @@ namespace CustomListUnitTests
             CustomList<int> newList = emptyList + numbers;
             Assert.AreEqual(newList[0], 1);
         }
+        [TestMethod]
+        public void GetCount_EmptyList_ReturnZeroCount()
+        {
+            CustomList<int> emptyList = new CustomList<int>;
+            Assert.AreEqual(emptyList.Count, 0);
+        }
+
+        [TestMethod]
+        public void Subtract_SameLists_ReturnEmptyList()
+        {
+            CustomList<int> numbers1 = new CustomList<int> { 1, 2, 3 };
+            CustomList<int> numbers2 = new CustomList<int> { 1, 2, 3 };
+            CustomList<int> subtracted = numbers1 - numbers2;
+            Assert.AreEqual(0, subtracted.Count);
+        }
+
+        [TestMethod]
+        public void Subtract_OneSimilaryInLists_ReturnSubtractedList()
+        {
+            CustomList<int> numbers1 = new CustomList<int> { 1, 2, 3 };
+            CustomList<int> numbers2 = new CustomList<int> { 1 };
+            CustomList<int> subtracted = numbers1 - numbers2;
+            Assert.AreEqual(2, subtracted.Count);
+        }
+        [TestMethod]
+        public void Subtract_OneSimilarityDuplicated_ReturnSubtractedList()
+        {
+            CustomList<int> numbers1 = new CustomList<int> { 1, 2, 3,1 };
+            CustomList<int> numbers2 = new CustomList<int> { 1,1 };
+            CustomList<int> subtracted = numbers1 - numbers2;
+            Assert.AreEqual(2, subtracted.Count);
+        }
+        [TestMethod]
+        public void Subtract_OneSimilarityMultipleTimes_ReturnSubtractedList()
+        {
+
+            CustomList<int> numbers1 = new CustomList<int> { 1, 2, 3, 1,1 };
+            CustomList<int> numbers2 = new CustomList<int> { 1, 1 };
+            CustomList<int> subtracted = numbers1 - numbers2;
+            Assert.AreEqual(3, subtracted.Count);
+        }
+        [TestMethod]
+        public void Subtract_NoSimilaritiesBetweenLists_ReturnSubtractedList()
+        {
+            CustomList<int> numbers1 = new CustomList<int> { 1, 2, 3, 4, 5 };
+            CustomList<int> numbers2 = new CustomList<int> { 6, 7 };
+            CustomList<int> subtracted = numbers1 - numbers2;
+            Assert.AreEqual(5, subtracted.Count);
+        }
+        [TestMethod]
+        public void Subtract_SecondListBigger_ReturnSubtractedList()
+        {
+            CustomList<int> numbers1 = new CustomList<int> { 1, 2, 3 };
+            CustomList<int> numbers2 = new CustomList<int> { 1,2,3,6, 7 };
+            CustomList<int> subtracted = numbers1 - numbers2;
+            Assert.AreEqual(0, subtracted.Count);
+        }
+        [TestMethod]
+        public void Subtract_OneItemRemoved_IndexChanges()
+        {
+            CustomList<int> numbers1 = new CustomList<int> { 1, 2, 3,6,7 };
+            CustomList<int> numbers2 = new CustomList<int> { 1, 2, 3 };
+            CustomList<int> subtracted = numbers1 - numbers2;
+            Assert.AreEqual(6, subtracted[0]);
+        }
+        [TestMethod]
+        public void Subtract_StringLists_ReturnSubtractedList()
+        {
+            CustomList<string> strings1 = new CustomList<string> { "hi", "word", "my", "name", "word", "is" };
+            CustomList<string> strings2 = new CustomList<string> { "word" };
+            CustomList<string> subtracted = strings1 - strings2;
+            Assert.AreEqual("is", subtracted[4]);
+        }
+        [TestMethod]
+        public void Subtract_EmptyList_ReturnsOriginalList()
+        {
+            CustomList<string> strings1 = new CustomList<string> { "hi", "word", "test" };
+            CustomList<string> emptyList = new CustomList<string> { };
+            CustomList<string> subtracted = strings1 - emptyList;
+            Assert.AreEqual(3, subtracted.Count);
+        }
+        [TestMethod]
+        public void Subtract_FromEmptyList_ReturnsEmptyList()
+        {
+            CustomList<int> numbers1 = new CustomList<int> {};
+            CustomList<int> numbers2 = new CustomList<int> { 1, 2, 3 };
+            CustomList<int> subtracted = numbers1 - numbers2;
+            Assert.AreEqual(0, subtracted.count);
+        }
+        [TestMethod]
+        public void Subtract_FromItself_ReturnEmptyList()
+        {
+            CustomList<int> numbers2 = new CustomList<int> { 1, 2, 3 };
+            CustomList<int> subtracted = numbers2 - numbers2;
+            Assert.AreEqual(0, subtracted.count);
+        }
+
     }
 }
