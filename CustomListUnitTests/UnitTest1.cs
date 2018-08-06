@@ -219,5 +219,45 @@ namespace CustomListUnitTests
             }
             Assert.AreEqual(5, numbers[2]);
         }
+
+        [TestMethod]
+        public void AddLists_TwoLists_AssertNumbersAtIndex()
+        {
+            CustomList<int> numbers = new CustomList<int> { 1, 2, 3 };
+            CustomList<int> moreNumbers = newCustomList<int> { 4,5,6};
+            CustomList<int> numbersAdded = numbers + moreNumbers;
+            Assert.AreEqual(numbersAdded[3], 4);
+        }
+
+        [TestMethod]
+        public void AddLists_TwoLists_ConfirmCount()
+        {
+            CustomList<int> numbers = new CustomList<int> { 1, 2, 3 };
+            CustomList<int> moreNumbers = newCustomList<int> { 4,5,6};
+            CustomList<int> numbersAdded = numbers + moreNumbers;
+            Assert.AreEqual(numbersAdded.Count, 6);
+        }
+        [TestMethod]
+        public void AddLists_SeveralLists_ConfirmCount()
+        {
+            CustomList<int> list1 = new CustomList<int> { 1, 2, 3 };
+            CustomList<int> list2 = new CustomList<int> { 1, 2, 3 };
+            CustomList<int> list3 = new CustomList<int> { 1, 2, 3 };
+            CustomList<int> list4 = new CustomList<int> { 1, 2, 3 };
+            CustomList<int> list5 = new CustomList<int> { 1, 2, 3 };
+            CustomList<int> list6 = new CustomList<int> { 1, 2, 3 };
+            CustomList<int> list7 = new CustomList<int> { 1, 2, 3 };
+            CustomList<int> list8 = new CustomList<int> { 1, 2, 3 };
+            CustomList<int> list9 = list1 + list2 + list3 + list4 + list5 + list6 + list7 + list8;
+            Assert.AreEqual(list9.Count, 24);
+        }
+        [TestMethod]
+        public void AddLists_AddToEmptyList_ConfirmIndexUnchanged()
+        {
+            CustomList<int> emptyList = new CustomList<int>;
+            CustomList<int> numbers = new CustomList<int> { 1, 2, 3 };
+            CustomList<int> newList = emptyList + numbers;
+            Assert.AreEqual(newList[0], 1);
+        }
     }
 }
