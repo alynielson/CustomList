@@ -119,10 +119,14 @@ namespace CustomList
             {
                 ChangeCapacity();
                 T[] temporaryArray = CreateArray();
-                temporaryArray = PutValuesBackInNewArray(temporaryArray, count - 1);
+                int lengthToCopyOldArray = count;
+                lengthToCopyOldArray--;
+                temporaryArray = PutValuesBackInNewArray(temporaryArray, lengthToCopyOldArray);
                 array = temporaryArray;
             }
-            this[count - 1] = value;
+            int indexToAddNewValue = count;
+            indexToAddNewValue--;
+            this[indexToAddNewValue] = value;
         }
 
         private bool CheckIfCapacityTooHigh()
@@ -162,7 +166,9 @@ namespace CustomList
                 }
                 else if (i > indexAtValue)
                 {
-                    temporaryArray[i - 1] = array[i];
+                    int indexToPlaceValue = i;
+                    indexToPlaceValue--;
+                    temporaryArray[indexToPlaceValue] = array[i];
                     i++;
                 }
                 else
@@ -214,6 +220,11 @@ namespace CustomList
                 }
             }
             return isValueInList;
+        }
+
+        public void ForEach()
+        {
+
         }
         public void ToString(T value) { }
         public void Zip(List<T> list1, List<T> list2) { }
