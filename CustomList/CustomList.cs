@@ -30,7 +30,15 @@ namespace CustomList
             }
             set
             {
-                array[index] = value;
+                if (index < 0 || index >= count)
+                {
+                    System.ArgumentException argEx = new System.ArgumentOutOfRangeException();
+                    throw argEx;
+                }
+                else
+                {
+                    array[index] = value;
+                }
             }
         }
         public int Count
