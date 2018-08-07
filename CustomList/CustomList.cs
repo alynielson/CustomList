@@ -11,7 +11,7 @@ namespace CustomList
         private int count;
         private int capacity;
         private T[] array;
-        private T[] newArray;
+        
 
         public T this[int index]
         {
@@ -86,7 +86,7 @@ namespace CustomList
             return capacity;
         }
 
-        private bool CheckCapacity()
+        private bool CheckIfOverCapacity()
         {
             bool isOverCapacity;
             if (count > capacity)
@@ -100,9 +100,9 @@ namespace CustomList
             return isOverCapacity;
         }
 
-        private T[] PutValuesBackInNewArray()
+        private T[] PutValuesBackInNewArray(T[] newArray, int length)
         {
-            for (int i = 0; i < count - 1; i++)
+            for (int i = 0; i < length; i++)
             {
                 newArray[i] = array[i];
             }
@@ -113,19 +113,103 @@ namespace CustomList
         public void Add(T value)
         {
             count++;
-            bool isOverCapacity = CheckCapacity();
+            bool isOverCapacity = CheckIfOverCapacity();
             if (isOverCapacity == true)
             {
                 ChangeCapacity();
-                newArray = CreateArray();
-                PutValuesBackInNewArray();
-                array = newArray;
+                T[] temporaryArray = CreateArray();
+                temporaryArray = PutValuesBackInNewArray(temporaryArray, count - 1);
+                array = temporaryArray;
             }
             this[count - 1] = value;
         }
 
-        public void RemoveFromList(T value) { }
+        private bool CheckIfCapacityTooHigh()
+        {
+            bool canCapacityBeShrunk;
+            int nextLowestCapacity = capacity / 2;
+            if (count <= nextLowestCapacity)
+            {
+                canCapacityBeShrunk = true;
+            }
+            else
+            {
+                canCapacityBeShrunk = false;
+            }
+            return canCapacityBeShrunk;
+        }
 
+        private int ShrinkCapacity()
+        {
+            capacity = capacity / 2;
+            return capacity;
+        }
+        private T[] RecreateArrayWithoutRemovedItem(T value, T[] temporaryArray, int index)
+        {
+            if (index > 0)
+            {
+                temporaryArray = PutValuesBackInNewArray(temporaryArray, index);
+            }
+            int i = index;
+            int indexAtValue = count;
+            while (i <= count)
+            {
+                if (array[i].Equals(value))
+                {
+                    indexAtValue = i;
+                    i++;
+                }
+                else if (i > indexAtValue)
+                {
+                    temporaryArray[i - 1] = array[i];
+                    i++;
+                }
+                else
+                {
+                    temporaryArray[i] = array[i];
+                    i++;
+                }
+            }
+            return temporaryArray;
+        }
+       
+
+        public bool Remove(T value, int index = 0)
+        {
+            bool didRemoveItem;
+            bool isValueInList = CheckIfValueInList(index, value);
+            if (isValueInList == true)
+            {
+                count--;
+                bool shouldCapacityBeShrunk = CheckIfCapacityTooHigh();
+                if (shouldCapacityBeShrunk == true)
+                {
+                    ShrinkCapacity();
+                }
+                T[] temporaryArray = CreateArray();
+                temporaryArray = RecreateArrayWithoutRemovedItem(value, temporaryArray, index);
+                array = temporaryArray;
+                didRemoveItem = true;
+            }
+            else
+            {
+                didRemoveItem = false;
+            } 
+            return didRemoveItem;
+        }
+        private bool CheckIfValueInList(int index,T value)
+        {
+            bool isValueInList = false;
+            for (int i = index; i < count; i++)
+            {
+                if (array[i].Equals(value))
+                {
+                    isValueInList = true;
+                    break;
+                }
+            }
+            return isValueInList;
+        }
         public void ToString(T value) { }
         public void Zip(List<T> list1, List<T> list2) { }
     }
