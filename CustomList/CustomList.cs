@@ -101,11 +101,12 @@ namespace CustomList
             return isOverCapacity;
         }
 
-        private T[] PutValuesBackInNewArray(T[] newArray, int length)
+        private T[] PutValuesBackInNewArray(T[] newArray, int length, T[] arrayToCopy, int whereToStart = 0)
         {
-            for (int i = 0; i < length; i++)
+
+            for (int i = whereToStart; i < length + whereToStart; i++)
             {
-                newArray[i] = array[i];
+                newArray[i] = arrayToCopy[i - whereToStart];
             }
             return newArray;
         }
@@ -121,7 +122,7 @@ namespace CustomList
                 T[] temporaryArray = CreateArray();
                 int lengthToCopyOldArray = count;
                 lengthToCopyOldArray--;
-                temporaryArray = PutValuesBackInNewArray(temporaryArray, lengthToCopyOldArray);
+                temporaryArray = PutValuesBackInNewArray(temporaryArray, lengthToCopyOldArray, array);
                 array = temporaryArray;
             }
             int indexToAddNewValue = count;
@@ -153,7 +154,7 @@ namespace CustomList
         {
             if (index > 0)
             {
-                temporaryArray = PutValuesBackInNewArray(temporaryArray, index);
+                temporaryArray = PutValuesBackInNewArray(temporaryArray, index, array);
             }
             int i = index;
             int indexAtValue = count;
@@ -220,6 +221,14 @@ namespace CustomList
                 }
             }
             return isValueInList;
+        }
+        public static CustomList<T> operator +(CustomList<T> listA, CustomList<T> listB)
+        {
+            int length = listA.count + listB.count;
+            CustomList<T> listC = new CustomList<T>(length) { };
+            listC.array = listC.PutValuesBackInNewArray(listC.array, listA.count, listA.array);
+            listC.array = listC.PutValuesBackInNewArray(listC.array, listB.count,listB.array, listA.count);
+            return listC;
         }
 
         public void ForEach()

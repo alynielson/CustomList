@@ -37,6 +37,14 @@ namespace CustomList
                 Console.WriteLine($"Value at index {i}: {newList[i]}");
             }
             Console.ReadLine();
+            CustomList<int> list2 = new CustomList<int> { 10, 11, 12 };
+            CustomList<int> list3 = new CustomList<int> { };
+            list3 = newList + list2;
+            for (int i = 0; i < list3.Count; i++)
+            {
+                Console.WriteLine($"List3 at index {i}: {list3[i]}");
+            }
+            Console.ReadLine();
         }
     }
 }
