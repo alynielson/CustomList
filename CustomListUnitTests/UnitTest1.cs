@@ -12,7 +12,7 @@ namespace CustomListUnitTests
         {
             CustomList<int> numbers = new CustomList<int> ();
             int number = 5;
-            numbers.AddToList(number);
+            numbers.Add(number);
             Assert.AreEqual(number, numbers[0]);
         }
         [TestMethod]
@@ -20,7 +20,7 @@ namespace CustomListUnitTests
         {
             CustomList<string> words = new CustomList<string>();
             string word = "Test";
-            words.AddToList(word);
+            words.Add(word);
             Assert.AreEqual(word, words[0]);
         }
         [TestMethod]
@@ -28,7 +28,7 @@ namespace CustomListUnitTests
         {
             CustomList<int> numbers = new CustomList<int> { 1, 2 };
             int number = 3;
-            numbers.AddToList(number);
+            numbers.Add(number);
             Assert.AreEqual(number, numbers[2]);
         }
         [TestMethod]
@@ -36,7 +36,7 @@ namespace CustomListUnitTests
         {
             CustomList<string> words = new CustomList<string> { "word1", "word2", "word3" };
             string word = "word4";
-            words.AddToList(word);
+            words.Add(word);
             Assert.AreEqual("word2", words[1]);
         }
         [TestMethod]
@@ -45,7 +45,7 @@ namespace CustomListUnitTests
             CustomList<int> numbers = new CustomList<int> { 1, 2 };
             int number = 3;
             int count = numbers.Count;
-            numbers.AddToList(number);
+            numbers.Add(number);
             Assert.AreEqual(count + 1, numbers.Count);
         }
         [TestMethod]
@@ -54,7 +54,7 @@ namespace CustomListUnitTests
             CustomList<int> numbers = new CustomList<int> { };
             for (int i = 0; i < 50; i++)
             {
-                numbers.AddToList(i);
+                numbers.Add(i);
             }
             Assert.AreEqual(27, numbers[27]);
         }
@@ -100,7 +100,7 @@ namespace CustomListUnitTests
             CustomList<int> numbers = new CustomList<int> { };
             for (int i = 0; i < 50; i++)
             {
-                numbers.AddToList(i);
+                numbers.Add(i);
             }
             for (int i = 49; i > 24; i --)
             {
@@ -123,7 +123,7 @@ namespace CustomListUnitTests
             {
                 for (int i = 0; i < 10; i++)
                 {
-                    numbers.AddToList(i);
+                    numbers.Add(i);
                 }
             }
             string numbersString = numbers.ToString();
@@ -224,7 +224,7 @@ namespace CustomListUnitTests
         public void AddLists_TwoLists_AssertNumbersAtIndex()
         {
             CustomList<int> numbers = new CustomList<int> { 1, 2, 3 };
-            CustomList<int> moreNumbers = newCustomList<int> { 4,5,6};
+            CustomList<int> moreNumbers = new CustomList<int> { 4,5,6};
             CustomList<int> numbersAdded = numbers + moreNumbers;
             Assert.AreEqual(numbersAdded[3], 4);
         }
@@ -233,7 +233,7 @@ namespace CustomListUnitTests
         public void AddLists_TwoLists_ConfirmCount()
         {
             CustomList<int> numbers = new CustomList<int> { 1, 2, 3 };
-            CustomList<int> moreNumbers = newCustomList<int> { 4,5,6};
+            CustomList<int> moreNumbers = new CustomList<int> { 4,5,6};
             CustomList<int> numbersAdded = numbers + moreNumbers;
             Assert.AreEqual(numbersAdded.Count, 6);
         }
@@ -254,7 +254,7 @@ namespace CustomListUnitTests
         [TestMethod]
         public void AddLists_AddToEmptyList_ConfirmIndexUnchanged()
         {
-            CustomList<int> emptyList = new CustomList<int>;
+            CustomList<int> emptyList = new CustomList<int> ();
             CustomList<int> numbers = new CustomList<int> { 1, 2, 3 };
             CustomList<int> newList = emptyList + numbers;
             Assert.AreEqual(newList[0], 1);
@@ -262,7 +262,7 @@ namespace CustomListUnitTests
         [TestMethod]
         public void GetCount_EmptyList_ReturnZeroCount()
         {
-            CustomList<int> emptyList = new CustomList<int>;
+            CustomList<int> emptyList = new CustomList<int> ();
             Assert.AreEqual(emptyList.Count, 0);
         }
 
