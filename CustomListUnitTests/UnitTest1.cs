@@ -10,7 +10,7 @@ namespace CustomListUnitTests
         [TestMethod]
         public void AddToList_PositiveNumber_ReturnNewListItem()
         {
-            CustomList<int> numbers = new CustomList<int> ();
+            CustomList<int> numbers = new CustomList<int>();
             int number = 5;
             numbers.Add(number);
             Assert.AreEqual(number, numbers[0]);
@@ -23,33 +23,33 @@ namespace CustomListUnitTests
             words.Add(word);
             Assert.AreEqual(word, words[0]);
         }
-       
 
-        //        [TestMethod]
-        //        public void AddToNonEmptyList_Int_ReturnNewListItem()
-        //        {
-        //            CustomList<int> numbers = new CustomList<int> { 1, 2 };
-        //            int number = 3;
-        //            numbers.Add(number);
-        //            Assert.AreEqual(number, numbers[2]);
-        //        }
-        //        [TestMethod]
-        //        public void AddToNonEmptyList_String_DoNotChangeOldItem()
-        //        {
-        //            CustomList<string> words = new CustomList<string> { "word1", "word2", "word3" };
-        //            string word = "word4";
-        //            words.Add(word);
-        //            Assert.AreEqual("word2", words[1]);
-        //        }
-        //        [TestMethod]
-        //        public void AddToList_Int_IncrementListCount()
-        //        {
-        //            CustomList<int> numbers = new CustomList<int> { 1, 2 };
-        //            int number = 3;
-        //            int count = numbers.Count;
-        //            numbers.Add(number);
-        //            Assert.AreEqual(count + 1, numbers.Count);
-        //        }
+
+        [TestMethod]
+        public void AddToNonEmptyList_Int_ReturnNewListItem()
+        {
+            CustomList<int> numbers = new CustomList<int> { 1, 2 };
+            int number = 3;
+            numbers.Add(number);
+            Assert.AreEqual(number, numbers[2]);
+        }
+        [TestMethod]
+        public void AddToNonEmptyList_String_DoNotChangeOldItem()
+        {
+            CustomList<string> words = new CustomList<string> { "word1", "word2", "word3" };
+            string word = "word4";
+            words.Add(word);
+            Assert.AreEqual("word2", words[1]);
+        }
+        [TestMethod]
+        public void AddToList_Int_IncrementListCount()
+        {
+            CustomList<int> numbers = new CustomList<int> { 1, 2 };
+            int number = 3;
+            int count = numbers.Count;
+            numbers.Add(number);
+            Assert.AreEqual(count + 1, numbers.Count);
+        }
         [TestMethod]
         public void AddToList_LotsOfNumbers_AnyIndexIsCorrect()
         {
@@ -61,62 +61,135 @@ namespace CustomListUnitTests
             Assert.AreEqual(27, numbers[27]);
         }
 
-        //        [TestMethod]
-        //        public void RemoveFromList_SpecificNumber_DecrementCount()
-        //        {
-        //            CustomList<int> numbers = new CustomList<int> {1,2,3 };
-        //            int numToRemove = 3;
-        //            int intialCount = numbers.Count;
-        //            numbers.RemoveFromList(numToRemove);
-        //            Assert.AreEqual(intialCount - 1, numbers.Count);
+        [TestMethod]
+        public void RemoveFromList_SpecificNumber_DecrementCount()
+        {
+            CustomList<int> numbers = new CustomList<int> { 1, 2, 3 };
+            int numToRemove = 3;
+            int intialCount = numbers.Count;
+            numbers.Remove(numToRemove);
+            Assert.AreEqual(intialCount - 1, numbers.Count);
 
-        //        }
-        //        [TestMethod]
-        //        public void RemoveFromList_StringAtIndex_DecrementCount()
-        //        {
-        //            CustomList<string> words = new CustomList<string> { "word1", "word2", "word3" };
-        //            int initialCount = words.Count;
-        //            words.RemoveFromList(words[2]);
-        //            Assert.AreEqual(initialCount - 1, words.Count);
-        //        }
-        //        [TestMethod]
-        //        public void RemoveFromList_SpecificString_DecrementCount()
-        //        {
-        //            CustomList<string> words = new CustomList<string> { "Hello", "world" };
-        //            string wordToRemove = "world";
-        //            int initialCount = words.Count;
-        //            words.RemoveFromList("world");
-        //            Assert.AreEqual(intialCount - 1, words.Count);
-        //        }
-        //        [TestMethod]
-        //        public void RemoveFromList_SpecificString_RestOfListUnchanged()
-        //        {
-        //            CustomList<string> words = new CustomList<string> { "Hello", "world" };
-        //            string wordToRemove = "world";
-        //            words.RemoveFromList("world");
-        //            Assert.AreEqual("Hello", words[0]);
-        //        }
-        //        [TestMethod]
-        //        public void RemoveFromList_LotsOfItems_DecrementCount()
-        //        {
-        //            CustomList<int> numbers = new CustomList<int> { };
-        //            for (int i = 0; i < 50; i++)
-        //            {
-        //                numbers.Add(i);
-        //            }
-        //            for (int i = 49; i > 24; i --)
-        //            {
-        //                numbers.RemoveFromList(i);
-        //            }
-        //            Assert.AreEqual(25, numbers.Count);
-        //        }
-        //        [TestMethod]
-        //        [ExpectedException(typeof(IndexOutOfRangeException))]
-        //        public void RemoveFromEmptyList_OneItem_ReturnException()
-        //        {
-        //            CustomList<int> numbers = new CustomList<int> { };
-        //            numbers.RemoveFromList(numbers[0]);
-        //        }
+        }
+        [TestMethod]
+        public void RemoveFromList_StringAtIndex_DecrementCount()
+        {
+            CustomList<string> words = new CustomList<string> { "word1", "word2", "word3" };
+            int initialCount = words.Count;
+            words.Remove(words[2]);
+            Assert.AreEqual(initialCount - 1, words.Count);
+        }
+        [TestMethod]
+        public void RemoveFromList_SpecificString_DecrementCount()
+        {
+            CustomList<string> words = new CustomList<string> { "Hello", "world" };
+            int initialCount = words.Count;
+            words.Remove("world");
+            Assert.AreEqual(initialCount - 1, words.Count);
+        }
+        [TestMethod]
+        public void RemoveFromList_SpecificString_RestOfListUnchanged()
+        {
+            CustomList<string> words = new CustomList<string> { "Hello", "world" };
+            words.Remove("world");
+            Assert.AreEqual("Hello", words[0]);
+        }
+        [TestMethod]
+        public void RemoveFromList_LotsOfItems_DecrementCount()
+        {
+            CustomList<int> numbers = new CustomList<int> { };
+            for (int i = 0; i < 50; i++)
+            {
+                numbers.Add(i);
+            }
+            for (int i = 49; i > 24; i--)
+            {
+                numbers.Remove(i);
+            }
+            Assert.AreEqual(25, numbers.Count);
+        }
+
+        [TestMethod]
+        public void RemoveFromList_ItemAtSpecificIndex_ReturnList()
+        {
+            CustomList<int> numbers = new CustomList<int> { 0, 1, 2, 3, 0, 1, 2, 3 };
+            numbers.Remove(0, 4);
+            CustomList<int> expectedResult = new CustomList<int> { 0, 1, 2, 3, 1, 2, 3 };
+            Assert.AreEqual(expectedResult[4], numbers[4]);
+        }
+        [TestMethod]
+        public void RemoveFromList_ItemAtSpecificIndex_CountCorrect()
+        {
+            CustomList<int> numbers = new CustomList<int> { 0, 1, 2, 3, 0, 1, 2, 3 };
+            numbers.Remove(0, 4);
+            CustomList<int> expectedResult = new CustomList<int> { 0, 1, 2, 3, 1, 2, 3 };
+            Assert.AreEqual(expectedResult.Count, numbers.Count);
+        }
+        [TestMethod]
+        public void RemoveFromList_ItemPastSpecificIndex_CorrectCount()
+        {
+            CustomList<int> numbers = new CustomList<int> { 0, 1, 2, 3, 0, 1, 2, 3 };
+            numbers.Remove(0, 2);
+            CustomList<int> expectedResult = new CustomList<int> { 0, 1, 2, 3, 1, 2, 3 };
+            Assert.AreEqual(expectedResult.Count, numbers.Count);
+        }
+        [TestMethod]
+
+        public void RemoveFromList_ItemPastSpecificIndex_ReturnList()
+        {
+            CustomList<int> numbers = new CustomList<int> { 0, 1, 2, 3, 0, 1, 2, 3 };
+            numbers.Remove(0, 2);
+            CustomList<int> expectedResult = new CustomList<int> { 0, 1, 2, 3, 1, 2, 3 };
+            Assert.AreEqual(expectedResult[4], numbers[4]);
+        }
+        [TestMethod]
+        public void RemoveFromList_ItemNotPastIndex_CountDoesntChange()
+        {
+            CustomList<int> numbers = new CustomList<int> { 0, 1, 2, 3, 0, 1, 2, 3 };
+            numbers.Remove(0, 5);
+            CustomList<int> expectedResult = new CustomList<int> { 0, 1, 2, 3, 0, 1, 2, 3 };
+            Assert.AreEqual(expectedResult.Count, numbers.Count);
+        }
+        [TestMethod]
+        public void RemoveFromList_ItemNotInList_CountDoesntChange()
+        {
+            CustomList<int> numbers = new CustomList<int> { 0, 1, 2, 3, 0, 1, 2, 3 };
+            numbers.Remove(7);
+            CustomList<int> expectedResult = new CustomList<int> { 0, 1, 2, 3, 0, 1, 2, 3 };
+            Assert.AreEqual(expectedResult.Count, numbers.Count);
+        }
+        [TestMethod]
+        public void RemoveFromList_ItemNotInList_ReturnFalseBool()
+        {
+            CustomList<int> numbers = new CustomList<int> { 0, 1, 2, 3, 0, 1, 2, 3 };
+            bool actualResult = numbers.Remove(7);
+            bool expectedResult = false;
+            Assert.AreEqual(actualResult, expectedResult);
+        }
+        [TestMethod]
+        public void RemoveFromList_ItemPastIndex_ReturnFalseBool()
+        {
+            CustomList<int> numbers = new CustomList<int> { 0, 1, 2, 3, 0, 1, 2, 3 };
+            bool actualResult = numbers.Remove(0, 7);
+            bool expectedResult = false;
+            Assert.AreEqual(actualResult, expectedResult);
+        }
+        [TestMethod]
+        public void RemoveFromList_ItemInList_ReturnTrue()
+        {
+            CustomList<int> numbers = new CustomList<int> { 0, 1, 2, 3, 0, 1, 2, 3 };
+            bool actualResult = numbers.Remove(1);
+            bool expectedResult = true;
+            Assert.AreEqual(actualResult, expectedResult);
+        }
+        [TestMethod]
+        public void RemoveFromEmptyList_OneItem_ReturnFalse()
+        {
+            CustomList<int> numbers = new CustomList<int> { };
+            bool actual = numbers.Remove(2);
+            bool expected = false;
+            Assert.AreEqual(actual, expected);
+        }
         //        [TestMethod]
         //        public void ToString_LotsOfNumbers_ReturnString()
         //        {

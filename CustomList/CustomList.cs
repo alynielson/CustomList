@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CustomList
 {
-    public class CustomList<T>
+    public class CustomList<T> : IEnumerable<T>
     {
         private int count;
         private int capacity;
@@ -174,10 +175,14 @@ namespace CustomList
         }
        
 
-        public bool Remove(T value, int index = 0)
+        public bool Remove(T value, int indexToStartLooking = 0)
         {
             bool didRemoveItem;
-            bool isValueInList = CheckIfValueInList(index, value);
+            if (count == 0)
+            {
+                return didRemoveItem = false;
+            }
+            bool isValueInList = CheckIfValueInList(indexToStartLooking, value);
             if (isValueInList == true)
             {
                 count--;
@@ -187,7 +192,7 @@ namespace CustomList
                     ShrinkCapacity();
                 }
                 T[] temporaryArray = CreateArray();
-                temporaryArray = RecreateArrayWithoutRemovedItem(value, temporaryArray, index);
+                temporaryArray = RecreateArrayWithoutRemovedItem(value, temporaryArray, indexToStartLooking);
                 array = temporaryArray;
                 didRemoveItem = true;
             }
@@ -212,5 +217,15 @@ namespace CustomList
         }
         public void ToString(T value) { }
         public void Zip(List<T> list1, List<T> list2) { }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            yield return GetEnumerator();
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return GetEnumerator();
+        }
     }
 }
