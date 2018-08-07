@@ -10,23 +10,33 @@ namespace CustomList
     {
         private int count;
         private int capacity;
+        private T[] array;
+        private T[] newArray;
+
         public T this[int index]
         {
             get
             {
-                if (index <= 0 || index >= count)
+                if (index < 0 || index >= count)
                 {
-                    return ArgumentOutOfRangeException;
+                    System.ArgumentException argEx = new System.ArgumentOutOfRangeException();
+                    throw argEx;
                 }
-                
+                else
+                {
+                    return array[index];
+                }
 
             }
-            set;
-        } 
+            set
+            {
+                array[index] = value;
+            }
+        }
         public int Count
         {
             get
-            { 
+            {
                 return count;
             }
         }
@@ -34,15 +44,15 @@ namespace CustomList
         public CustomList(int length = 0)
         {
             count = length;
-            capacity = DetermineInitialCapacity(count);
-            array1 = CreateArray(capacity);
+            DetermineInitialCapacity();
+            array = CreateArray();
         }
 
 
         private T[] CreateArray()
         {
-            T[] array1 = new T[capacity];
-            return array1;
+            T[] anyArray = new T[capacity];
+            return anyArray;
         }
 
         private int DetermineInitialCapacity()
@@ -50,11 +60,11 @@ namespace CustomList
             int n = 2;
             do
             {
-                capacity = Math.Pow(2,n);
+                capacity = Convert.ToInt32(Math.Pow(2, n));
                 n++;
             }
             while (capacity < count);
-            return capacity;    
+            return capacity;
         }
 
         private int ChangeCapacity()
@@ -75,11 +85,20 @@ namespace CustomList
             {
                 isOverCapacity = true;
             }
-            else 
+            else
             {
                 isOverCapacity = false;
             }
             return isOverCapacity;
+        }
+
+        private T[] PutValuesBackInNewArray()
+        {
+            for (int i = 0; i < count - 1; i++)
+            {
+                newArray[i] = array[i];
+            }
+            return newArray;
         }
 
 
@@ -89,7 +108,10 @@ namespace CustomList
             bool isOverCapacity = CheckCapacity();
             if (isOverCapacity == true)
             {
-                capacity = ChangeCapacity();
+                ChangeCapacity();
+                newArray = CreateArray();
+                PutValuesBackInNewArray();
+                array = newArray;
             }
             this[count - 1] = value;
         }
