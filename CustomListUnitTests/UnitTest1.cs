@@ -198,35 +198,44 @@ namespace CustomListUnitTests
             bool expected = false;
             Assert.AreEqual(actual, expected);
         }
-        //        [TestMethod]
-        //        public void ToString_LotsOfNumbers_ReturnString()
-        //        {
-        //            CustomList<int> numbers = new CustomList<int> { };
-        //            for (int j = 0; j < 5; j++)
-        //            {
-        //                for (int i = 0; i < 10; i++)
-        //                {
-        //                    numbers.Add(i);
-        //                }
-        //            }
-        //            string numbersString = numbers.ToString();
-        //            Assert.AreEqual(numbersString, "01234567890123456789012345678901234567890123456789");
-        //        }
-        //        [TestMethod]
-        //        public void ToString_Letters_ReturnString()
-        //        {
-        //            CustomList<string> letters = new CustomList<string> {"ABC", " ", "DEF" , " ", "GHI" };
-        //            string lettersString = letters.ToString();
-        //            Assert.AreEqual(lettersString, "ABC DEF GHI");
-        //        }
+        [TestMethod]
+        public void ToString_LotsOfNumbers_ReturnString()
+        {
+            CustomList<int> numbers = new CustomList<int> { };
+            for (int j = 0; j < 5; j++)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    numbers.Add(i);
+                }
+            }
+            string numbersString = numbers.ToString();
+            Assert.AreEqual(numbersString, "01234567890123456789012345678901234567890123456789");
+        }
+        [TestMethod]
+        public void ToString_Letters_ReturnString()
+        {
+            CustomList<string> letters = new CustomList<string> { "ABC", " ", "DEF", " ", "GHI" };
+            string lettersString = letters.ToString();
+            Assert.AreEqual(lettersString, "ABC DEF GHI");
+        }
 
-        //        [TestMethod]
-        //        [ExpectedException(typeof(NullReferenceException))]
-        //        public void ToString_EmptyList_ThrowsException()
-        //        {
-        //            CustomList<string> words = new CustomList<string> { };
-        //            string wordsString = words.ToString();
-        //        }
+        [TestMethod]
+        
+        public void ToString_EmptyList_ReturnsEmptyString()
+        {
+            CustomList<string> words = new CustomList<string> { };
+            string wordsString = words.ToString();
+            Assert.AreEqual("", wordsString);
+        }
+
+        [TestMethod]
+        public void ToString_ListWithSeparator_ReturnStringWithSeparator()
+        {
+            CustomList<int> numbers = new CustomList<int> { 817, 584, 8034 };
+            string phoneNumber = numbers.ToStringWithSeparator("-");
+            Assert.AreEqual("817-584-8034", phoneNumber);
+        }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]

@@ -241,7 +241,29 @@ namespace CustomList
         {
 
         }
-        public void ToString(T value) { }
+        public override string ToString()
+        {
+            string listAsString = "";
+            for (int i = 0; i < count; i++)
+            {
+                listAsString += $"{array[i]}";
+            }
+            return listAsString;
+        }
+
+        public string ToStringWithSeparator(string separator)
+        {
+            string listAsString = "";
+            for (int i = 0; i < count; i++)
+            {
+                listAsString += $"{array[i]}";
+                if (i < (count - 1))
+                {
+                    listAsString += separator;
+                }
+            }
+            return listAsString;
+        }
         public void Zip(List<T> list1, List<T> list2) { }
 
         IEnumerator IEnumerable.GetEnumerator()
