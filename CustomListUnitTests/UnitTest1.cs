@@ -542,6 +542,8 @@ namespace CustomListUnitTests
             CustomList<int> expected = new CustomList<int> {1,2,3 };
             Assert.AreEqual(zipped.Count, expected.Count);
         }
+
+        
         [TestMethod]
         public void Zip_TwoEmptyStrings_ReturnEmptyString()
         {

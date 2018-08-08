@@ -66,7 +66,7 @@ namespace CustomList
 
         private int DetermineInitialCapacity()
         {
-            int n = 2;
+            int n = 1;
             do
             {
                 capacity = Convert.ToInt32(Math.Pow(2, n));
