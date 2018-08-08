@@ -46,8 +46,8 @@ namespace CustomList
             }
             Console.ReadLine();
             CustomList<int> numbers = new CustomList<int> {1,2,3};
-            
-            CustomList<int> numbersRemoved = numbers - numbers;
+            CustomList<int> moreNumbers = new CustomList<int> { 1 };
+            CustomList<int> numbersRemoved = numbers - moreNumbers;
             for (int i = 0; i < numbersRemoved.Count; i++)
             {
                 Console.WriteLine($"Subtracted list index{i}: {numbersRemoved[i]}");

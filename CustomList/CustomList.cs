@@ -227,7 +227,8 @@ namespace CustomList
 
         public static CustomList<T> operator -(CustomList<T> listA, CustomList<T> listB)
         {
-            CustomList<T> listC = listA;
+            CustomList<T> listC = new CustomList<T>(listA.count) { };
+            listC.array = listC.PutValuesBackInNewArray(listC.array, listA.count, listA.array);
             for (int i = 0; i < listB.Count; i++)
             {
                 T itemToRemove = listB[i];

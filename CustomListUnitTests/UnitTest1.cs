@@ -475,6 +475,24 @@ namespace CustomListUnitTests
             Assert.AreEqual(subtracted.Count, 14);
         }
 
+        [TestMethod]
+        public void Subtract_TwoLists_ConfirmFirstListUnchanged()
+        {
+            CustomList<int> numbers1 = new CustomList<int> { 1, 2, 3, 6, 7 };
+            CustomList<int> numbers2 = new CustomList<int> { 1, 2, 3 };
+            CustomList<int> subtracted = numbers1 - numbers2;
+            Assert.AreEqual(numbers1.Count,5);
+        }
+
+        [TestMethod]
+        public void Subtract_TwoLists_ConfirmSecondListUnchanged()
+        {
+            CustomList<int> numbers1 = new CustomList<int> { 1, 2, 3, 6, 7 };
+            CustomList<int> numbers2 = new CustomList<int> { 1, 2, 3 };
+            CustomList<int> subtracted = numbers1 - numbers2;
+            Assert.AreEqual(numbers2.Count, 3);
+        }
+
 
         //        [TestMethod]
         //        public void Zip_TwoListsOfSameLength_ReturnNewList()
