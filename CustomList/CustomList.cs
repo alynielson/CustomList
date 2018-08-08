@@ -146,13 +146,9 @@ namespace CustomList
             capacity = capacity / 2;
             return capacity;
         }
-        private T[] RecreateArrayWithoutRemovedItem(T value, T[] temporaryArray, int index)
+        private T[] RecreateArrayWithoutRemovedItem(T value, T[] temporaryArray)
         {
-            if (index > 0)
-            {
-                temporaryArray = PutValuesBackInNewArray(temporaryArray, index, array);
-            }
-            int i = index;
+            int i = 0;
             int indexAtValue = count + 1;
             while (i <= count)
             {
@@ -176,14 +172,14 @@ namespace CustomList
         }
        
 
-        public bool Remove(T value, int indexToStartLooking = 0)
+        public bool Remove(T value)
         {
             bool didRemoveItem;
             if (count == 0)
             {
                 return didRemoveItem = false;
             }
-            bool isValueInList = CheckIfValueInList(indexToStartLooking, value);
+            bool isValueInList = CheckIfValueInList(value);
             if (isValueInList == true)
             {
                 count--;
@@ -193,7 +189,7 @@ namespace CustomList
                     ShrinkCapacity();
                 }
                 T[] temporaryArray = CreateArray();
-                temporaryArray = RecreateArrayWithoutRemovedItem(value, temporaryArray, indexToStartLooking);
+                temporaryArray = RecreateArrayWithoutRemovedItem(value, temporaryArray);
                 array = temporaryArray;
                 didRemoveItem = true;
             }
@@ -203,10 +199,10 @@ namespace CustomList
             } 
             return didRemoveItem;
         }
-        private bool CheckIfValueInList(int index,T value)
+        private bool CheckIfValueInList(T value)
         {
             bool isValueInList = false;
-            for (int i = index; i < count; i++)
+            for (int i = 0; i < count; i++)
             {
                 if (array[i].Equals(value))
                 {
@@ -237,10 +233,7 @@ namespace CustomList
             return listC;
         }
 
-        public void ForEach()
-        {
-
-        }
+       
         public override string ToString()
         {
             string listAsString = "";

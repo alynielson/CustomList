@@ -117,47 +117,9 @@ namespace CustomListUnitTests
             Assert.AreEqual(25, numbers.Count);
         }
 
-        [TestMethod]
-        public void RemoveFromList_ItemAtSpecificIndex_ReturnList()
-        {
-            CustomList<int> numbers = new CustomList<int> { 0, 1, 2, 3, 0, 1, 2, 3 };
-            numbers.Remove(0, 4);
-            CustomList<int> expectedResult = new CustomList<int> { 0, 1, 2, 3, 1, 2, 3 };
-            Assert.AreEqual(expectedResult[4], numbers[4]);
-        }
-        [TestMethod]
-        public void RemoveFromList_ItemAtSpecificIndex_CountCorrect()
-        {
-            CustomList<int> numbers = new CustomList<int> { 0, 1, 2, 3, 0, 1, 2, 3 };
-            numbers.Remove(0, 4);
-            CustomList<int> expectedResult = new CustomList<int> { 0, 1, 2, 3, 1, 2, 3 };
-            Assert.AreEqual(expectedResult.Count, numbers.Count);
-        }
-        [TestMethod]
-        public void RemoveFromList_ItemPastSpecificIndex_CorrectCount()
-        {
-            CustomList<int> numbers = new CustomList<int> { 0, 1, 2, 3, 0, 1, 2, 3 };
-            numbers.Remove(0, 2);
-            CustomList<int> expectedResult = new CustomList<int> { 0, 1, 2, 3, 1, 2, 3 };
-            Assert.AreEqual(expectedResult.Count, numbers.Count);
-        }
-        [TestMethod]
-
-        public void RemoveFromList_ItemPastSpecificIndex_ReturnList()
-        {
-            CustomList<int> numbers = new CustomList<int> { 0, 1, 2, 3, 0, 1, 2, 3 };
-            numbers.Remove(0, 2);
-            CustomList<int> expectedResult = new CustomList<int> { 0, 1, 2, 3, 1, 2, 3 };
-            Assert.AreEqual(expectedResult[4], numbers[4]);
-        }
-        [TestMethod]
-        public void RemoveFromList_ItemNotPastIndex_CountDoesntChange()
-        {
-            CustomList<int> numbers = new CustomList<int> { 0, 1, 2, 3, 0, 1, 2, 3 };
-            numbers.Remove(0, 5);
-            CustomList<int> expectedResult = new CustomList<int> { 0, 1, 2, 3, 0, 1, 2, 3 };
-            Assert.AreEqual(expectedResult.Count, numbers.Count);
-        }
+       
+        
+       
         [TestMethod]
         public void RemoveFromList_ItemNotInList_CountDoesntChange()
         {
@@ -174,14 +136,7 @@ namespace CustomListUnitTests
             bool expectedResult = false;
             Assert.AreEqual(actualResult, expectedResult);
         }
-        [TestMethod]
-        public void RemoveFromList_ItemPastIndex_ReturnFalseBool()
-        {
-            CustomList<int> numbers = new CustomList<int> { 0, 1, 2, 3, 0, 1, 2, 3 };
-            bool actualResult = numbers.Remove(0, 7);
-            bool expectedResult = false;
-            Assert.AreEqual(actualResult, expectedResult);
-        }
+       
         [TestMethod]
         public void RemoveFromList_ItemInList_ReturnTrue()
         {
