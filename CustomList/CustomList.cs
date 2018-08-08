@@ -264,7 +264,45 @@ namespace CustomList
             }
             return listAsString;
         }
-        public void Zip(List<T> list1, List<T> list2) { }
+        public void Zip(CustomList<T> listA, CustomList<T> listB)
+        {
+            if (listA.count == listB.count)
+            {
+                for (int i = 0; i < listA.count; i++)
+                {
+                    Add(listA[i]);
+                    Add(listB[i]);
+                }
+            }
+            else
+            {
+                CustomList<T> biggerList;
+                CustomList<T> smallerList;
+                if (listA.count > listB.count)
+                {
+                    biggerList = listA;
+                    smallerList = listB;
+                }
+                else
+                {
+                    biggerList = listB;
+                    smallerList = listA;
+                }
+                for (int i = 0; i < smallerList.count; i++)
+                {
+                    Add(listA[i]);
+                    Add(listB[i]);
+                }
+                for (int i = smallerList.count; i < biggerList.count; i++)
+                {
+                    Add(biggerList[i]);
+                }
+            }
+        }
+
+        
+
+       
 
         IEnumerator IEnumerable.GetEnumerator()
         {

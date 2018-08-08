@@ -10,10 +10,10 @@ namespace CustomList
     {
         static void Main(string[] args)
         {
-            CustomList<int> empty = new CustomList<int>() { };
-            Console.WriteLine(empty.ToString());
-            Console.ReadLine();
+            
 
+           
+            Console.ReadLine();
 
             CustomList<int> newList = new CustomList<int>();
             for (int i = 0; i < 4; i++)
