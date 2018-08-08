@@ -10,7 +10,20 @@ namespace CustomList
     {
         static void Main(string[] args)
         {
-           
+            string word = "word";
+            List<string> notCustom = new List<string> () {};
+            foreach (string item in notCustom)
+            {
+                word += item;
+            }
+            Console.WriteLine(word);
+          
+            CustomList<int> newListw = new CustomList<int> { 1, 2, 3 };
+            foreach (int item in newListw)
+            {
+                Console.WriteLine($"Item: {item}");
+            }
+            Console.ReadLine();
 
            
             Console.ReadLine();

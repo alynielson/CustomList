@@ -253,72 +253,80 @@ namespace CustomListUnitTests
             words[3] = "word";
         }
 
-        //        [TestMethod]
-        //        public void Iterate_AddToEachInt_ReturnListWithSums()
-        //        {
-        //            CustomList<int> numbers = new CustomList<int> { 1, 2, 3 };
-        //            foreach (int number in numbers)
-        //            {
-        //                number += 1;
-        //            }
-        //            Assert.AreEqual(3, index[1]);
-        //        }
-        //        [TestMethod]
-        //        public void Iterate_ConcatenateStrings_ReturnEditedList()
-        //        {
-        //            CustomList<string> words = new CustomList<string> { "word", "word", "word" };
-        //            foreach (string word in words)
-        //            {
-        //                word += "test";
-        //            }
-        //            Assert.AreEqual("wordtest", index[2]);
-        //        }
+        [TestMethod]
+        public void Iterate_AddNumbersToSum_SumIsCorrect()
+        {
+            int sum = 0;
+            CustomList<int> numbers = new CustomList<int> { 1, 2, 3 };
+            foreach (int number in numbers)
+            {
+                sum += number;
+            }
+            Assert.AreEqual(6, sum);
+        }
+        [TestMethod]
+        public void Iterate_ConcatenateStrings_ReturnCorrectString()
+        {
+            string finalString = "";
+            CustomList<string> words = new CustomList<string> { "word", "word", "word" };
+            foreach (string word in words)
+            {
+                finalString += word;
+            }
+            Assert.AreEqual("wordwordword", finalString);
+        }
 
-        //[TestMethod]
-        //[ExpectedException(typeof(NullReferenceException))]
-        //public void Iterate_EmptyList_ThrowException()
-        //{
-        //    CustomList<string> words = new CustomList<string> { };
-        //    foreach (string word in words)
-        //    {
-        //        word += "123";
-        //    }
-        //}
+        [TestMethod]
+        
+        public void Iterate_EmptyList_DoNothing()
+        {
+            string newString = "";
+            CustomList<string> words = new CustomList<string> { };
+            foreach (string word in words)
+            {
+                newString += word;
+            }
+            Assert.AreEqual(newString, "");
+        }
 
-        //        [TestMethod]
-        //        public void Iterate_BreakDuringLoop_PartOfListUnchanged()
-        //        {
-        //            CustomList<int> numbers = new CustomList<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-        //            foreach (int number in numbers)
-        //            {
-        //                if (number >= 5)
-        //                {
-        //                    break;
-        //                }
-        //                else
-        //                {
-        //                    number += 2;
-        //                }
-        //            }
-        //            Assert.AreEqual(6, numbers[5]);
-        //        }
-        //        [TestMethod]
-        //        public void Iterate_BreakDuringLoop_PartOfListChanged()
-        //        {
-        //            CustomList<int> numbers = new CustomList<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-        //            foreach (int number in numbers)
-        //            {
-        //                if (number >= 5)
-        //                {
-        //                    break;
-        //                }
-        //                else
-        //                {
-        //                    number += 2;
-        //                }
-        //            }
-        //            Assert.AreEqual(5, numbers[2]);
-        //        }
+        [TestMethod]
+        public void Iterate_BreakDuringLoop_ConfirmBreakOccurs()
+        {
+            string test = "passed";
+            CustomList<int> numbers = new CustomList<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            foreach (int number in numbers)
+            {
+                if (number <= 5)
+                {
+                    test += "!";
+                }
+                else if (number == 6)
+                {
+                    test += " now stop";
+                    break;
+                }
+                else
+                {
+                    test += "?";
+                }
+            }
+            Assert.AreEqual(test, "passed!!!!! now stop");
+        }
+        [TestMethod]
+        public void Iterate_CustomListOfCustomLists_ReturnCorrectProperties()
+        {
+            int totalOfQuantities = 0;
+            CustomList<int> list1 = new CustomList<int> { 1 };
+            CustomList<int> list2 = new CustomList<int> { 1, 2 };
+            CustomList<int> list3 = new CustomList<int> { 1,2,3 };
+            CustomList<CustomList<int>> listOfLists = new CustomList<CustomList<int>> { list1, list2, list3 };
+            foreach (CustomList<int> list in listOfLists)
+            {
+                totalOfQuantities += list.Count;
+            }
+            Assert.AreEqual(totalOfQuantities, 6);
+            
+        }
 
         [TestMethod]
         public void AddLists_TwoLists_AssertNumbersAtIndex()
