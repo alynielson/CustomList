@@ -72,6 +72,14 @@ namespace CustomListUnitTests
 
         }
         [TestMethod]
+        public void RemoveFromList_ValueWithDuplicates_RemoveCorrectValues()
+        {
+            CustomList<int> numbers = new CustomList<int> { 1, 2, 3, 1 };
+            int numToRemove = 1;
+            numbers.Remove(numToRemove);
+            Assert.AreEqual(1, numbers[2]);
+        }
+        [TestMethod]
         public void RemoveFromList_StringAtIndex_DecrementCount()
         {
             CustomList<string> words = new CustomList<string> { "word1", "word2", "word3" };
@@ -341,6 +349,15 @@ namespace CustomListUnitTests
             CustomList<int> numbers = new CustomList<int> { 1, 2, 3 };
             CustomList<int> newList = emptyList + numbers;
             Assert.AreEqual(newList[0], 1);
+        }
+
+        [TestMethod]
+        public void AddLists_TwoEmptyLists_ConfirmZeroCount()
+        {
+            CustomList<int> list1 = new CustomList<int>() { };
+            CustomList<int> list2 = new CustomList<int>() { };
+            CustomList<int> newList = list1 + list2;
+            Assert.AreEqual(0, newList.Count);
         }
         [TestMethod]
         public void GetCount_EmptyList_ReturnZeroCount()

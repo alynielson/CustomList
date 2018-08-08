@@ -45,6 +45,15 @@ namespace CustomList
                 Console.WriteLine($"List3 at index {i}: {list3[i]}");
             }
             Console.ReadLine();
+            CustomList<int> test1 = new CustomList<int> { 1, 2, 3,1 };
+            CustomList<int> test2 = new CustomList<int> { 1 };
+            CustomList<int> test3 = test1 - test2;
+            for (int i = 0; i < test3.Count; i++)
+            {
+                Console.WriteLine($"Subtracted list index {i}: {test3[i]}");
+            }
+            Console.WriteLine($"Final list count: {test3.Count}");
+            Console.ReadLine();
         }
     }
 }

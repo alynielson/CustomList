@@ -120,14 +120,10 @@ namespace CustomList
             {
                 ChangeCapacity();
                 T[] temporaryArray = CreateArray();
-                int lengthToCopyOldArray = count;
-                lengthToCopyOldArray--;
-                temporaryArray = PutValuesBackInNewArray(temporaryArray, lengthToCopyOldArray, array);
+                temporaryArray = PutValuesBackInNewArray(temporaryArray, count-1, array);
                 array = temporaryArray;
             }
-            int indexToAddNewValue = count;
-            indexToAddNewValue--;
-            this[indexToAddNewValue] = value;
+            this[count-1] = value;
         }
 
         private bool CheckIfCapacityTooHigh()
@@ -160,16 +156,14 @@ namespace CustomList
             int indexAtValue = count;
             while (i <= count)
             {
-                if (array[i].Equals(value))
+                if (array[i].Equals(value) && indexAtValue > i)
                 {
                     indexAtValue = i;
                     i++;
                 }
                 else if (i > indexAtValue)
                 {
-                    int indexToPlaceValue = i;
-                    indexToPlaceValue--;
-                    temporaryArray[indexToPlaceValue] = array[i];
+                    temporaryArray[i-1] = array[i];
                     i++;
                 }
                 else
@@ -228,6 +222,16 @@ namespace CustomList
             CustomList<T> listC = new CustomList<T>(length) { };
             listC.array = listC.PutValuesBackInNewArray(listC.array, listA.count, listA.array);
             listC.array = listC.PutValuesBackInNewArray(listC.array, listB.count,listB.array, listA.count);
+            return listC;
+        }
+
+        public static CustomList<T> operator -(CustomList<T> listA, CustomList<T> listB)
+        {
+            CustomList<T> listC = listA;
+            for (int i = 0; i < listB.Count; i++)
+            {
+                listC.Remove(listB[i]);
+            }
             return listC;
         }
 
