@@ -153,7 +153,7 @@ namespace CustomList
                 temporaryArray = PutValuesBackInNewArray(temporaryArray, index, array);
             }
             int i = index;
-            int indexAtValue = count;
+            int indexAtValue = count + 1;
             while (i <= count)
             {
                 if (array[i].Equals(value) && indexAtValue > i)
@@ -230,7 +230,8 @@ namespace CustomList
             CustomList<T> listC = listA;
             for (int i = 0; i < listB.Count; i++)
             {
-                listC.Remove(listB[i]);
+                T itemToRemove = listB[i];
+                listC.Remove(itemToRemove);
             }
             return listC;
         }
