@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CustomList
 {
-    public class CustomList<T> : IEnumerable
+    public class CustomList<T> : IEnumerable , IComparable<T>, IComparer<T>
     {
         private int count;
         private int capacity;
@@ -293,6 +293,13 @@ namespace CustomList
             }
         }
 
+        public void Sort()
+        {
+           
+        }
+
+       
+
         public IEnumerator GetEnumerator()
         {
             for (int i = 0; i < count; i++)
@@ -300,6 +307,17 @@ namespace CustomList
                 yield return array[i];
             }
             yield break;
+        }
+
+        public int CompareTo(T item)
+        {
+            
+            throw new NotImplementedException();
+        }
+
+        public int Compare(T x, T y)
+        {
+            throw new NotImplementedException();
         }
     }
 }

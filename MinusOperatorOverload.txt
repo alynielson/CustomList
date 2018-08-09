@@ -1,0 +1,44 @@
+Minus Operator Overload for CustomList<T>
+
+Subtracts one CustomList<T> from another of the same type, overloading the (-) operator for CustomLists. 
+
+Syntax:
+list3 = list1 - list2
+
+Parameters:
+(item,item)
+	Type: CustomList<T>
+	The first CustomList item is the CustomList to be subtracted from.
+	The second item is the CustomList containing the item(s) to subtract. Both CustomLists
+	are of the same type.
+
+Return Value:
+Type: CustomList<T>
+A CustomList of the same type as the input parameters. The returned CustomList is a copy of the
+first CustomList input, but for each item in the second CustomList that is equal to an item
+in the first, the returned list will not contain the first instance of that item. The equality 
+comparer is Object.Equals. The input CustomLists are unchanged.
+
+Example:
+
+CustomList<int> firstList = new CustomList<int> {1,2,3,1,2,3};
+CustomList<int> secondList = new CustomList<int> {1,0,2,6,6,6,6};
+CustomList<int> resultList = new CustomList<int> {};
+
+resultList = firstList - secondList; 
+for (int i = 0; i < resultList.Count; i++) 
+{
+	Console.WriteLine($"resultList at index {i}: {resultList[i]}");
+}
+Console.WriteLine($"Count of resultList: {resultList.Count}");
+Console.ReadLine();
+
+//This will produce the following output. Note that the presence of the numbers 6 and 0 had no effect on
+the result. Also note there is still a 1 and 2 present in the result, since secondList only
+contained one instance of each.
+
+resultList at index 0: 3
+resultList at index 1: 1
+resultList at index 2: 2
+resultList at index 3: 3
+Count of resultList: 4//
