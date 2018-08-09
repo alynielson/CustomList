@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CustomList
 {
-    public class CustomList<T> : IEnumerable , IComparable<T>, IComparer<T>
+    public class CustomList<T> : IEnumerable
     {
         private int count;
         private int capacity;
@@ -295,6 +295,42 @@ namespace CustomList
 
         public void Sort()
         {
+            int i = 0;
+            while (i < count-1)
+            {
+                int result = Compare(array[i], array[i + 1]);
+                if (result == 1)
+                {
+                    i++;
+                }
+                else if (result == -1)
+                {
+                    T[] temporaryArray = CreateArray();
+                    int j = 0;
+                    while (j < count)
+                    {
+                       if (j == i)
+                       {
+                            temporaryArray[i] = array[i + 1];
+                            temporaryArray[i + 1] = array[i];
+                            j += 2;
+                            
+                       }
+                        else
+                        {
+                            temporaryArray[j]= array[j];
+                            j++;
+                        }
+                    }
+                    array = temporaryArray;
+                    i = 0;
+                }
+                else
+                {
+                    i++;
+                }
+            }
+            
            
         }
 
@@ -309,15 +345,169 @@ namespace CustomList
             yield break;
         }
 
-        public int CompareTo(T item)
+        public int CompareTo(object current, object other)
         {
-            
-            throw new NotImplementedException();
+            int result = 0;
+            bool isNumber = DetermineIfObjectIsAnyTypeOfNumber(current);
+            if (other is string)
+            {
+                int whichIsLonger = DetermineWhichStringLonger((string)current, (string)other);
+                int maxI = DetermineMaxStringIndexToCheck((string)current, (string)other);
+                result = DetermineWhichStringFirst((string)current, (string)other, maxI, whichIsLonger);
+            }
+            else if (isNumber == true)
+            {
+                decimal numberA = ConvertToDecimal(current);
+                decimal numberB = ConvertToDecimal(other);
+                result = DetermineWhichNumberFirst(numberA, numberB);
+
+            }
+            else
+            {
+                System.NotSupportedException cannotSort = new System.NotSupportedException();
+                throw cannotSort;
+            }
+            return result;
         }
+
+        private decimal ConvertToDecimal(object possibleNumber)
+        {
+            string possible = $"{possibleNumber}";
+            decimal num;
+            bool canBeConverted = Decimal.TryParse(possible, out num);
+            return num;
+        }
+
+       
 
         public int Compare(T x, T y)
         {
-            throw new NotImplementedException();
+            if (x == null)
+            {
+                if (y == null)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            else
+            {
+                if (y == null)
+                {
+                    return 1;
+                }
+                else
+                {
+
+                    return CompareTo(x, y);
+
+                }
+            }
+        }
+
+        private bool DetermineIfObjectIsAnyTypeOfNumber(object current)
+        {
+
+            return current is sbyte
+            || current is byte
+            || current is short
+            || current is ushort
+            || current is int
+            || current is uint
+            || current is long
+            || current is ulong
+            || current is float
+            || current is double
+            || current is decimal;
+
+        }
+
+        private int DetermineWhichStringLonger(string stringA, string stringB)
+        {
+            int whichIsLonger;
+            if (stringA.Length > stringB.Length)
+            {
+                whichIsLonger = 1;
+            }
+            else if (stringA.Length < stringB.Length)
+            {
+                whichIsLonger = -1;
+            }
+            else
+            {
+                whichIsLonger = 0; 
+            }
+            return whichIsLonger;
+        }
+    
+      
+
+        private int DetermineMaxStringIndexToCheck(string stringA, string stringB)
+        {
+            int maxI;
+            if (stringA.Length > stringB.Length)
+            {
+                maxI = stringB.Length;
+            }
+            else if (stringA.Length < stringB.Length)
+            {
+                maxI = stringA.Length;
+            }
+            else
+            {
+                maxI = stringA.Length;
+            }
+            return maxI;
+        }
+
+        
+        private int DetermineWhichNumberFirst(decimal numberA, decimal numberB)
+        {
+            if (numberA > numberB)
+            {
+                return 1;
+            }
+            else if (numberA < numberB)
+            {
+                return -1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        private int DetermineWhichStringFirst(string stringA, string stringB, int maxI, int whichIsLonger)
+        {
+            int result = 0;
+            int i = 0;
+            while (i < maxI)
+            {
+                byte currentValue = Convert.ToByte(stringA[i]);
+                byte otherValue = Convert.ToByte(stringB[i]);
+                if (currentValue < otherValue)
+                {
+                    result = 1;
+                    break;
+                }
+                else if (currentValue > otherValue)
+                {
+                    result = -1;
+                    break;
+                }
+                else
+                {
+                    i++;
+                }
+            }
+            if (result == 0)
+            {
+                result = whichIsLonger;
+            }
+            return result;
         }
     }
 }
